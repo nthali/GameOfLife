@@ -1,0 +1,17 @@
+{
+  "name": "gameoflife",
+  "version": "1.0.0",
+  "dependencies": {
+    "jest": "^27.0.5"
+  },
+  "devDependencies": {
+    "expect": "^27.0.2"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "main": "Gol.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
