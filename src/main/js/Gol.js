@@ -8,6 +8,10 @@ class GameOfLife {
     setLivingAt(location) {
         this.empty = false
     }
+
+    tick() {
+
+    }
 }
 
 class Location {

@@ -11,13 +11,21 @@ in the next generation, as if by overcrowding.
 life in the next generation.
  */
 describe( 'Game of life tests', () => {
-    // Test names should influence Object's API
-    test( 'initial world is empty', () => {
+    // 1. Test names should influence Object's API
+    // 2. (remove) Duplication of knowledge about topology - from (x, y) to Location objects
+
+    // 3. Testing state vs Testing behavior
+    test( 'a new world is empty', () => {
         let world = new GameOfLife()
         expect(world.isEmpty()).toBe(true)
     })
 
-    // (remove) Duplication of knowledge about topology - from (x, y) to Location objects
+    test( 'empty world stays empty after tick', () => {
+        let world = new GameOfLife()
+        world.tick()
+        expect( world.isEmpty() ).toBe( true )
+    })
+
     test('world is not empty after adding a living cell', () => {
         let world = new GameOfLife()
         world.setLivingAt(new Location(0, 0))
