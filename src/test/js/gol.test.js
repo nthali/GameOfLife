@@ -21,17 +21,54 @@ describe( 'Game of life tests', () => {
         expect(world.isEmpty()).toBe(true)
     })
 
+    test('world is not empty after adding a living cell', () => {
+        let world = new GameOfLife()
+        world.setLivingAt(locationInQuestion)
+        expect(world.isEmpty()).toBe(false)
+    })
+
     // 4. Don't have tests depend on previous tests
     test( 'empty world stays empty after tick', () => {
-        let world = GameOfLife.emptyWorld()
+        let world = GameOfLife.emptyWorld() // no longer calling new
         world.tick()
         expect( world.isEmpty() ).toBe( true )
     })
 
-    test('world is not empty after adding a living cell', () => {
-        let world = new GameOfLife()
-        world.setLivingAt(new Location(0, 0))
-        expect(world.isEmpty()).toBe(false)
+    const locationInQuestion = new Location(0, 0);
+
+    test( 'living cell with no live neighbors dies in the next generation', () => {
+        let world = GameOfLife.emptyWorld()
+        world.setLivingAt(locationInQuestion)
+        // no living neighbors
+        world.tick()
+        expect(world.aliveAt(locationInQuestion)).toBe(false)
     })
 
+    test( 'living cell with one live neighbors dies in the next generation', () => {
+        let world = GameOfLife.emptyWorld()
+        world.setLivingAt(locationInQuestion)
+        world.setLivingAt(new Location(0, 1))
+        // no living neighbors
+        world.tick()
+        expect(world.aliveAt(locationInQuestion)).toBe(false)
+    })
+
+    test( 'living cell with 2 live neighbors lives in the next generation', () => {
+        let world = GameOfLife.emptyWorld()
+        world.setLivingAt(locationInQuestion)
+        world.setLivingAt(new Location(0, 1))
+        world.setLivingAt(new Location(1, 0))
+        world.tick()
+        expect(world.aliveAt(locationInQuestion)).toBe(true)
+    })
+
+    test( 'living cell with 3 live neighbors lives in the next generation', () => {
+        let world = GameOfLife.emptyWorld()
+        world.setLivingAt(locationInQuestion)
+        world.setLivingAt(new Location(0, 1))
+        world.setLivingAt(new Location(1, 0))
+        world.setLivingAt(new Location(1, 1))
+        world.tick()
+        expect(world.aliveAt(locationInQuestion)).toBe(true)
+    })
 })
