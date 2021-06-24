@@ -12,6 +12,10 @@ class GameOfLife {
     tick() {
 
     }
+
+    static emptyWorld() {
+        return new GameOfLife();
+    }
 }
 
 class Location {

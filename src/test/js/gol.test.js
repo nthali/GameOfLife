@@ -15,13 +15,15 @@ describe( 'Game of life tests', () => {
     // 2. (remove) Duplication of knowledge about topology - from (x, y) to Location objects
 
     // 3. Testing state vs Testing behavior
+
     test( 'a new world is empty', () => {
         let world = new GameOfLife()
         expect(world.isEmpty()).toBe(true)
     })
 
+    // 4. Don't have tests depend on previous tests
     test( 'empty world stays empty after tick', () => {
-        let world = new GameOfLife()
+        let world = GameOfLife.emptyWorld()
         world.tick()
         expect( world.isEmpty() ).toBe( true )
     })
