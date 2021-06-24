@@ -40,8 +40,8 @@ describe( 'Game of life tests', () => {
         let world = GameOfLife.emptyWorld()
         world.setLivingAt(locationInQuestion)
         // no living neighbors
-        world.tick()
-        expect(world.aliveAt(locationInQuestion)).toBe(false)
+        // world.tick()
+        expect(world.aliveInNextGeneration(locationInQuestion)).toBe(false)
     })
 
     test( 'living cell with one live neighbors dies in the next generation', () => {
@@ -49,8 +49,8 @@ describe( 'Game of life tests', () => {
         world.setLivingAt(locationInQuestion)
         world.setLivingAt(new Location(0, 1))
         // no living neighbors
-        world.tick()
-        expect(world.aliveAt(locationInQuestion)).toBe(false)
+        // world.tick()
+        expect(world.aliveInNextGeneration(locationInQuestion)).toBe(false)
     })
 
     test( 'living cell with 2 live neighbors lives in the next generation', () => {
@@ -58,8 +58,8 @@ describe( 'Game of life tests', () => {
         world.setLivingAt(locationInQuestion)
         world.setLivingAt(new Location(0, 1))
         world.setLivingAt(new Location(1, 0))
-        world.tick()
-        expect(world.aliveAt(locationInQuestion)).toBe(true)
+        // world.tick()
+        expect(world.aliveInNextGeneration(locationInQuestion)).toBe(true)
     })
 
     test( 'living cell with 3 live neighbors lives in the next generation', () => {
@@ -68,7 +68,37 @@ describe( 'Game of life tests', () => {
         world.setLivingAt(new Location(0, 1))
         world.setLivingAt(new Location(1, 0))
         world.setLivingAt(new Location(1, 1))
-        world.tick()
-        expect(world.aliveAt(locationInQuestion)).toBe(true)
+        // world.tick()
+        expect(world.aliveInNextGeneration(locationInQuestion)).toBe(true)
+    })
+
+    test( 'living cell with more than 3 live neighbors DIES in the next generation', () => {
+        let world = GameOfLife.emptyWorld()
+        world.setLivingAt(locationInQuestion)
+        world.setLivingAt(new Location(0, 1))
+        world.setLivingAt(new Location(1, 0))
+        world.setLivingAt(new Location(1, 1))
+        world.setLivingAt(new Location(-1, 0))
+        // world.tick()
+        expect(world.aliveInNextGeneration(locationInQuestion)).toBe(false)
+    })
+
+    test( 'dead cell with exactly 3 live neighbors COMES ALIVE in the next generation', () => {
+        let world = GameOfLife.emptyWorld()
+        // Dead cell at 0,0 and 3 neighbors alive
+        world.setLivingAt(new Location(0, 1))
+        world.setLivingAt(new Location(1, 0))
+        world.setLivingAt(new Location(1, 1))
+        // world.tick()
+        expect(world.aliveInNextGeneration(locationInQuestion)).toBe(true)
+    })
+
+    test( 'dead cell with 2 live neighbors STAYS DEAD in the next generation', () => {
+        let world = GameOfLife.emptyWorld()
+        // Dead cell at 0,0 and 2 neighbors alive
+        world.setLivingAt(new Location(0, 1))
+        world.setLivingAt(new Location(1, 0))
+        // world.tick()
+        expect(world.aliveInNextGeneration(locationInQuestion)).toBe(false)
     })
 })

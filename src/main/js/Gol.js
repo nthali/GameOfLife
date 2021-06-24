@@ -23,14 +23,18 @@ class GameOfLife {
         this.livingCells = newGeneration
     }
 
-    aliveInNextGeneration(livingCell) {
+    aliveInNextGeneration(cell) {
         let numLivingNeighbors = 0
-        this.neighborsOfCellAt(livingCell.x, livingCell.y).forEach(neighbor => {
-            if (this.aliveAt(neighbor))
+        let iAmAlive = this.livingNow(cell) // this check is redundant if method called from tick()
+        this.neighborsOfCellAt(cell.x, cell.y).forEach(neighbor => {
+            if (this.livingNow(neighbor))
                 numLivingNeighbors++
         })
-        if (numLivingNeighbors >= 2)
-            return true
+        return iAmAlive ? numLivingNeighbors >=2 && numLivingNeighbors < 4 : numLivingNeighbors === 3
+    }
+
+    livingNow(locationInQuestion) {
+        return this.livingCells.find( location => location.x === locationInQuestion.x && location.y === locationInQuestion.y ) !== undefined;
     }
 
     /*
@@ -44,10 +48,6 @@ class GameOfLife {
             new Location( x-1, y), new Location(x+1, y),
             new Location(x-1, y-1), new Location(x, y-1), new Location(x+1, y-1)
         ]
-    }
-
-    aliveAt(locationInQuestion) {
-        return this.livingCells.find( location => location.x === locationInQuestion.x && location.y === locationInQuestion.y ) !== undefined;
     }
 }
 
