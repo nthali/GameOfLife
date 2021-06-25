@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game of Life</title>
+    <link rel="stylesheet" href="../css/gol.css">
+    <script type="application/javascript" src="../js/golUi.js"></script>
+</head>
+<body>
+<div>
+    <span>Click on cells below to mark them "alive", then click the Start button</span>
+    <button type="button" onclick="startSimulation()">Start</button>
+    <button type="button" onclick="stopSimulation()">Stop</button>
+</div>
+<div id="gameOfLifeGrid" class="grid-container">
+    <script>
+        createGameOfLifeGrid()
+    </script>
+</div>
+</body>
+</html>

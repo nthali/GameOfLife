@@ -15,7 +15,7 @@ class GameOfLife {
 
     tick() {
         let newGeneration = []
-        this.livingCells.forEach((livingCell, index, array) => {
+        this.livingCells.forEach((livingCell) => {
             if (this.aliveInNextGeneration(livingCell)) {
                 newGeneration.push(livingCell)
             }

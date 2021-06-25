@@ -1,4 +1,4 @@
-const { GameOfLife, Location } = require('../../main/js/Gol')
+const { GameOfLife, Location } = require('../../main/js/gameOfLife')
 
 /*
 1. If a living cell has less than two living neighbors, it is dead in
