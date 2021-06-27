@@ -1,7 +1,9 @@
+// const {CellLocation} = require('../../main/js/gameOfLife')
+
 function createGameOfLifeGrid() {
     const gridContainer = document.getElementById('gameOfLifeGrid');
-    for (let row=0; row<50; row++) {
-        for (let column=0; column<50; column++) {
+    for (let row = 0; row < gridDimension; row++) {
+        for (let column = 0; column < gridDimension; column++) {
             const gridItem = document.createElement("div");
             gridItem.classList.add("grid-item")
             gridItem.setAttribute('data-x', String(row))
@@ -24,14 +26,65 @@ let simulationInterval;
 
 function startSimulation() {
     console.log('starting simulation')
-    simulationInterval = setInterval(runGameOfLife, 500)
+    simulationInterval = setInterval(nextGen, 500)
+}
+
+let gameOfLife = new GameOfLife();
+
+function nextGen() {
+    console.log("running simulation...")
+    fromViewToModel()
+    let nextGenLivingCells = []
+    for (let row = 0; row < gridDimension; row++) {
+        for (let column = 0; column < gridDimension; column++) {
+            const cellLocation = new CellLocation(row, column);
+            if (gameOfLife.aliveInNextGeneration(cellLocation)) {
+                nextGenLivingCells.push(cellLocation)
+            }
+        }
+    }
+    gameOfLife.livingCells = nextGenLivingCells
+    fromModelToView()
+}
+
+function clearGrid() {
+    const uiGridItems = document.getElementById('gameOfLifeGrid').children
+    let gridItem;
+    for ( gridItem of uiGridItems) {
+        gridItem.style.backgroundColor = 'white'
+    }
 }
 
 function stopSimulation() {
     clearInterval(simulationInterval)
+    clearGrid()
+    gameOfLife.clear()
     console.log('simulation stopped')
 }
 
-function runGameOfLife() {
-    console.log("running simulation...")
+function fromViewToModel() {
+    const uiGridItems = document.getElementById('gameOfLifeGrid').children
+    let gridItem;
+    for ( gridItem of uiGridItems) {
+        if (gridItem.style.backgroundColor === 'black') {
+            gameOfLife.setLivingAt(
+                new CellLocation(
+                    Number(gridItem.getAttribute('data-x')),
+                    Number(gridItem.getAttribute('data-y'))
+                )
+            )
+        }
+    }
+}
+
+function fromModelToView() {
+    const uiGridItems = document.getElementById('gameOfLifeGrid').children
+    let gridItem;
+    for (gridItem of uiGridItems) {
+        const livingCell = gameOfLife.livingCells.find(cell =>
+            cell.x === Number(gridItem.getAttribute('data-x')) &&
+            cell.y === Number(gridItem.getAttribute('data-y'))
+        )
+        gridItem.style.backgroundColor = livingCell !== undefined ? 'black' : 'white';
+    }
 }

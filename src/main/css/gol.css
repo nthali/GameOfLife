@@ -1,11 +1,15 @@
+:root {
+    --grid-dimension: 5
+}
+
 div {
     padding: 10px;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(50, 20px);
-    grid-template-rows: repeat(50, 20px);
+    grid-template-columns: repeat(var(--grid-dimension), 20px);
+    grid-template-rows: repeat(var(--grid-dimension), 20px);
 }
 
 .grid-item {

@@ -1,8 +1,19 @@
+class CellLocation {
+    constructor( x, y ) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
 class GameOfLife {
     livingCells = []
 
     static emptyWorld() {
         return new GameOfLife();
+    }
+
+    clear() {
+        this.livingCells = []
     }
 
     isEmpty() {
@@ -44,21 +55,14 @@ class GameOfLife {
      */
     neighborsOfCellAt(x, y) {
         return [
-            new Location(x-1, y+1), new Location(x, y+1), new Location(x+1, y+1),
-            new Location( x-1, y), new Location(x+1, y),
-            new Location(x-1, y-1), new Location(x, y-1), new Location(x+1, y-1)
+            new CellLocation(x-1, y+1), new CellLocation(x, y+1), new CellLocation(x+1, y+1),
+            new CellLocation( x-1, y), new CellLocation(x+1, y),
+            new CellLocation(x-1, y-1), new CellLocation(x, y-1), new CellLocation(x+1, y-1)
         ]
     }
 }
 
-class Location {
-    constructor( x, y ) {
-        this.x = x;
-        this.y = y;
-    }
-}
-
 module.exports = {
+    CellLocation,
     GameOfLife,
-    Location
 }

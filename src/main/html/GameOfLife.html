@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <title>Game of Life</title>
     <link rel="stylesheet" href="../css/gol.css">
+    <script type="application/javascript" src="../js/gameOfLife.js"></script>
     <script type="application/javascript" src="../js/golUi.js"></script>
+    <script>
+        const gridDimension = 5;
+    </script>
 </head>
 <body>
 <div>
@@ -13,9 +17,9 @@
     <button type="button" onclick="stopSimulation()">Stop</button>
 </div>
 <div id="gameOfLifeGrid" class="grid-container">
-    <script>
-        createGameOfLifeGrid()
-    </script>
 </div>
+<script>
+    createGameOfLifeGrid()
+</script>
 </body>
 </html>
