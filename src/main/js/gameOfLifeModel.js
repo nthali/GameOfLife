@@ -5,11 +5,11 @@ class CellLocation {
     }
 }
 
-class GameOfLife {
+class GameOfLifeModel {
     livingCells = []
 
     static emptyWorld() {
-        return new GameOfLife();
+        return new GameOfLifeModel();
     }
 
     clear() {
@@ -24,19 +24,9 @@ class GameOfLife {
         this.livingCells.push(location)
     }
 
-    tick() {
-        let newGeneration = []
-        this.livingCells.forEach((livingCell) => {
-            if (this.aliveInNextGeneration(livingCell)) {
-                newGeneration.push(livingCell)
-            }
-        })
-        this.livingCells = newGeneration
-    }
-
     aliveInNextGeneration(cell) {
         let numLivingNeighbors = 0
-        let iAmAlive = this.livingNow(cell) // this check is redundant if method called from tick()
+        let iAmAlive = this.livingNow(cell)
         this.neighborsOfCellAt(cell.x, cell.y).forEach(neighbor => {
             if (this.livingNow(neighbor))
                 numLivingNeighbors++
@@ -64,5 +54,5 @@ class GameOfLife {
 
 module.exports = {
     CellLocation,
-    GameOfLife,
+    GameOfLife: GameOfLifeModel,
 }
