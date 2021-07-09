@@ -29,7 +29,7 @@ function startSimulation() {
     simulationInterval = setInterval(nextGen, 500)
 }
 
-let gameOfLife = new GameOfLife();
+let gameOfLife = new GameOfLifeModel();
 
 function nextGen() {
     console.log("running simulation...")

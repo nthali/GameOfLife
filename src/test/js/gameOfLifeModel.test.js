@@ -33,7 +33,6 @@ describe( 'Game of life tests', () => {
         let world = GameOfLife.emptyWorld()
         world.setLivingAt(locationInQuestion)
         // no living neighbors
-        // world.tick()
         expect(world.aliveInNextGeneration(locationInQuestion)).toBe(false)
     })
 

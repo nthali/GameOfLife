@@ -1,5 +1,5 @@
 class CellLocation {
-    constructor( x, y ) {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
     }
@@ -31,11 +31,13 @@ class GameOfLifeModel {
             if (this.livingNow(neighbor))
                 numLivingNeighbors++
         })
-        return iAmAlive ? numLivingNeighbors >=2 && numLivingNeighbors < 4 : numLivingNeighbors === 3
+        return iAmAlive ? numLivingNeighbors >= 2 && numLivingNeighbors < 4 : numLivingNeighbors === 3
     }
 
     livingNow(locationInQuestion) {
-        return this.livingCells.find( location => location.x === locationInQuestion.x && location.y === locationInQuestion.y ) !== undefined;
+        return this.livingCells.find(location =>
+            location.x === locationInQuestion.x &&
+            location.y === locationInQuestion.y) !== undefined;
     }
 
     /*
@@ -45,9 +47,9 @@ class GameOfLifeModel {
      */
     neighborsOfCellAt(x, y) {
         return [
-            new CellLocation(x-1, y+1), new CellLocation(x, y+1), new CellLocation(x+1, y+1),
-            new CellLocation( x-1, y), new CellLocation(x+1, y),
-            new CellLocation(x-1, y-1), new CellLocation(x, y-1), new CellLocation(x+1, y-1)
+            new CellLocation(x - 1, y + 1), new CellLocation(x, y + 1), new CellLocation(x + 1, y + 1),
+            new CellLocation(x - 1, y), new CellLocation(x + 1, y),
+            new CellLocation(x - 1, y - 1), new CellLocation(x, y - 1), new CellLocation(x + 1, y - 1)
         ]
     }
 }
